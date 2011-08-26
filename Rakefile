@@ -1,55 +1,35 @@
-require 'yaml'
-require File.expand_path('../tools/shadowbox', __FILE__)
-
-def get_config(file)
-  fail "Unable to find configuration file #{file}" unless File.exist?(file)
-  YAML.load_file(file)
-end
-
-def run_builder(config)
-  target_dir = config.delete('target') || 'build'
-  mkdir_p(target_dir)
-  target = Shadowbox::Target.new(target_dir)
-
-  Shadowbox::Builder.new(config).run!(target)
-end
-
-def builder_config
-  get_config(ENV['CONFIG'] || 'build.yml')
-end
-
-def examples_builder_config
-  get_config File.join(File.dirname(__FILE__), 'examples', 'build.yml')
-end
-
-def tests_builder_config
-  get_config File.join(File.dirname(__FILE__), 'tests', 'build.yml')
+def target_dir
+  ENV['TARGET'] || 'build'
 end
 
 task :default => :build
 
-desc 'Create a custom build based on settings in build.yml (or $CONFIG)'
+desc 'Create a custom build (in $TARGET, defaults to "build")'
 task :build do
-  run_builder(builder_config)
-end
+  require File.expand_path('../tools/shadowbox', __FILE__)
 
-namespace :build do
-  desc 'Create a build for running the examples'
-  task :examples do
-    run_builder(examples_builder_config)
-  end
+  mkdir_p(target_dir)
+  target = Shadowbox::Target.new(target_dir)
 
-  desc 'Create a build for running the tests'
-  task :tests do
-    run_builder(tests_builder_config)
-  end
+  # To disable compression, flash, or video support, use COMPRESS=0 or similar.
+  compress = ENV['COMPRESS'] != '0'
+  support_flash = ENV['FLASH'] != '0'
+  support_video = ENV['VIDEO'] != '0'
+
+  builder = Shadowbox::Builder.new(compress, support_flash, support_video)
+  builder.run!(target)
 end
 
 desc 'Clean up all temporary files'
 task :clean do
-  configs = [ builder_config, examples_builder_config, tests_builder_config ]
-  configs.each do |config|
-    target = config.key?('target') && config['target']
-    rm_rf(target) if File.exist?(target)
-  end
+  rm_rf(target_dir) if File.exist?(target_dir)
+end
+
+desc 'Serve examples over HTTP (on $PORT, defaults to 9292)'
+task :serve do
+  require 'rack'
+
+  root = File.expand_path('..', __FILE__)
+  port = ENV['PORT'] || 9292
+  Rack::Handler::WEBrick.run(Rack::File.new(root), :Port => port)
 end

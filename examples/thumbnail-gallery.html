@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <title>Shadowbox - Thumbnail Gallery Example</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <link rel="stylesheet" type="text/css" href="files/style.css">
+    <link rel="stylesheet" type="text/css" href="../source/shadowbox.css">
+    <script type="text/javascript" src="../source/shadowbox.js"></script>
+  </head>
+  <body>
+    <p>
+      This example demonstrates how to open a gallery of images in Shadowbox by
+      clicking on a thumbnail of any image in the gallery. As in the simple
+      <a href="thumbnail.html">thumbnail example</a> each thumbnail is wrapped
+      in a link element with a <code>rel="shadowbox"</code> attribute. However,
+      to ensure that Shadowbox displays all images in the same gallery, we can
+      use the special square bracket notation to indicate the name of a gallery.
+      Then, when any image in that gallery is clicked, all will be opened.
+    </p>
+
+    <p>
+      It is important to note that when using this method the gallery order will
+      reflect the same order that the elements are found in the DOM.
+    </p>
+
+    <p>
+      <a rel="shadowbox[hongkong]" href="files/hongkong-1.jpg"><img alt="Hong Kong Skyline" src="files/hongkong-1.jpg" height="120"></a>
+      <a rel="shadowbox[hongkong]" href="files/hongkong-3.jpg"><img alt="Hong Kong Skyline" src="files/hongkong-3.jpg" height="120"></a>
+      <a rel="shadowbox[hongkong]" href="files/hongkong-2.jpg"><img alt="Hong Kong Skyline" src="files/hongkong-2.jpg" height="120"></a>
+    </p>
+
+    <p>This file is part of <a href="http://shadowbox-js.com/">Shadowbox.js</a>.</p>
+  </body>
+</html>

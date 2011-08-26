@@ -2,26 +2,21 @@
 
 <html>
   <head>
-    <title>Shadowbox Vimeo Example</title>
+    <title>Shadowbox YouTube Example</title>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
     <link rel="stylesheet" type="text/css" href="files/style.css">
     <link rel="stylesheet" type="text/css" href="../source/shadowbox.css">
     <script type="text/javascript" src="../source/shadowbox.js"></script>
   </head>
   <body>
-    <p>This example demonstrates how to open a Vimeo video in Shadowbox.</p>
+    <p>This example demonstrates how to open a YouTube video in Shadowbox.</p>
     <p><a id="montage" href="http://player.vimeo.com/video/7058755?autoplay=1" title="Egypt/Lebanon Montage">Click Here</a></p>
     <p id="foot">This file is part of <a href="http://shadowbox-js.com/">Shadowbox.js</a>.</p>
     <script type="text/javascript">
     // Override the default click handler on the #montage link to open the link
     // in Shadowbox. We override it manually so we can specify the width/height.
     document.getElementById('montage').onclick = function () {
-      Shadowbox({
-        href: this.href,
-        title: this.title,
-        width: 640,
-        height: 352
-      });
+      Shadowbox({href: this.href, width: 640, height: 352});
       // Returning false here prevents the browser from following the link.
       return false;
     }

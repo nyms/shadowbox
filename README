@@ -35,39 +35,20 @@ will also need Java installed. You can always use the web interface on the Shado
 (http://shadowbox-js.com/download.html) to build your own version of the code if you are
 unable to do it on your own.
 
-How to Run Tests and Examples
------------------------------
+Running the Examples
+--------------------
 
-The Shadowbox test suite is written with QUnit (http://github.com/jquery/qunit). To run the
-tests, you first need to build the code using the `build:tests` Rake task.
+Most of the examples can be run by simply opening one of the example HTML files
+in a web browser. However, those that require Flash (for example, playing an
+FLV-encoded video) are better served over HTTP. For this reason the Rakefile
+includes a small built-in web server that you can use to view the examples. To
+start the server, use:
 
-    $ rake build:tests
+    $ rake serve
 
-Once you have built the code, open `tests/index.html` in your browser of choice. Likewise,
-to run any of the examples you first need to run the `build:examples` Rake task before
-opening the example HTML file in your browser.
-
-    $ rake build:examples
-
-How to Contribute
------------------
-
-If you would like to contribute to the project please email me your contribution/patch
-at mjijackson@gmail.com. I'm more than happy to accomodate fixes and modifications that
-make Shadowbox a better product.
+Then, browse to the examples index at http://localhost:9292/examples/index.html
 
 Bugs
 ----
 
 Please report any bugs that you may find at http://github.com/mjijackson/shadowbox/issues.
-
-License
--------
-
-The Shadowbox license is available online at http://shadowbox-js.com/LICENSE.
-
-Credits
--------
-
-Shadowbox employs several open source libraries including Sizzle.js (http://sizzlejs.com/)
-and swfobject (http://code.google.com/p/swfobject/).
