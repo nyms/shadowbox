@@ -117,6 +117,16 @@ module Shadowbox
       end
     end
 
+    # Returns a hash of characters that is unique to this builder's
+    # configuration.
+    def to_hash
+      hash = ""
+      hash << (@compress ? "1" : "0")
+      hash << (@support_flash ? "1" : "0")
+      hash << (@support_video ? "1" : "0")
+      hash
+    end
+
   private
 
     def root(*args)
